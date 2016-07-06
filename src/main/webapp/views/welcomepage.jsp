@@ -32,9 +32,9 @@ function validate()
 					style="font-family: sans-serif; color: #003b6f; font-size: 15px;">
 					<label>Login Id &nbsp;&nbsp;&nbsp;&nbsp;</label>
 					<input type="text"
-						name="loginId" style="size: 15px;"> <br>
+						name="loginId" id="loginId" style="size: 15px;"> <br>
 					<br> <label>Password</label> 
-					<input type="text" name="password"
+					<input type="text" name="password" id="password"
 						style="size: 15px;"> <br>
 					<br> 
 						<input type="submit" id="loginbtn" value="Login"/>

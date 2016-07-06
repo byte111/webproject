@@ -7,4 +7,9 @@ public class JMSHelper {
 	{
 		return senderId+"_"+receiverId+"_"+new Date().getTime();
 	}
+	
+	public static String getBillingId()
+	{		
+		return "BID"+Math.random();
+	}
 }

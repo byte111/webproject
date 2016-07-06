@@ -5,6 +5,7 @@ com\deva\webproj\jms\UploadMessageProducer.class
 com\deva\webproj\controller\DataTrackingController.class
 com\deva\webproj\dao\DataUploadDAO.class
 com\deva\webproj\service\DBService.class
+com\deva\webproj\dao\PreparedStatementCallbackImplementer.class
 com\deva\webproj\vo\DataUpload.class
 com\deva\webproj\service\JMSService.class
 com\deva\webproj\dao\DataUploadDAO$1.class
