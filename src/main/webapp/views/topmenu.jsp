@@ -13,13 +13,10 @@
 	<ul>
 		<li><a href="dashboard">Upload Document</a></li><li>
 		<li><a href="datatrack">Download Document</a></li>
-		<a href="logout" style="float:right;">Logout</a>
+		<li><a href="profile">Settings</a></li>
+		<div style="float:right;"> <a href="logout" style="float:right;">Logout</a>
+		</div>
 	</ul>
-<!-- 	<div id="tabs-1">
-		<p>Send Invoice Documents</p>
-	</div>
-	<div id='tabs-2'>
-		<p>List Invoice Documents</p>
-	</div> -->
+
 	
 </div>	

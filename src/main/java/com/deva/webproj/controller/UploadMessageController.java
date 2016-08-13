@@ -1,14 +1,11 @@
 package com.deva.webproj.controller;
 
-import java.awt.PageAttributes.MediaType;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
-
 import javax.ws.rs.core.UriBuilder;
 
 import org.springframework.stereotype.Controller;
@@ -20,11 +17,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.deva.webproj.constants.WebprojectConstants;
 import com.deva.webproj.helper.JMSHelper;
-import com.deva.webproj.jms.UploadMessageProducer;
 import com.deva.webproj.service.DBService;
 import com.deva.webproj.vo.UserMO;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @Controller
