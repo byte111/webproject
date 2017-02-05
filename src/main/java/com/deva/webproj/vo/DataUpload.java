@@ -1,6 +1,7 @@
 package com.deva.webproj.vo;
 
-public class DataUpload {
+public class DataUpload 
+{
 	private String correlationId;
 	private String senderId;
 	private String receiverId;

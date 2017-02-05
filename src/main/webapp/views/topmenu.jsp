@@ -8,12 +8,13 @@
   });
   </script>
 
-<div id="tabs">
+<div id="tabs" style="height:400px;">
 
 	<ul>
 		<li><a href="dashboard">Upload Document</a></li><li>
 		<li><a href="datatrack">Download Document</a></li>
-		<li><a href="profile">Settings</a></li>
+		<li><a href="settings">Settings</a></li>
+		<li><a href="tpview">Trading Partnership</a></li>
 		<div style="float:right;"> <a href="logout" style="float:right;">Logout</a>
 		</div>
 	</ul>

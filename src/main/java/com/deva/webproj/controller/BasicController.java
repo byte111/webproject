@@ -13,6 +13,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.deva.webproj.constants.WebprojectConstants;
 import com.deva.webproj.helper.JMSHelper;
+import com.deva.webproj.jaxb.Userprofile;
 import com.deva.webproj.jms.UploadMessageProducer;
 import com.deva.webproj.service.DBService;
 import com.deva.webproj.vo.UserMO;
@@ -44,17 +46,34 @@ public class BasicController {
 	}
 
 
+	@RequestMapping(value="/tpview", method = RequestMethod.GET)
+	public ModelAndView loadTPView()
+	{
+		return new ModelAndView("tpview");
+	}
+	
 
 	@RequestMapping(value = "/loadHomePage", method = RequestMethod.POST)
-	public String loadHomePage(@RequestParam(value="loginId") String loginId,@RequestParam(value="password") String password, HttpServletRequest request) throws Exception
+	public String loadHomePage(@RequestParam(value="loginId") String loginId,@RequestParam(value="password") String password , HttpServletRequest request) throws Exception
 	{
 		ModelMap attr = new ModelMap();
-		
+		Userprofile userprof = null;
 		try {
+			
 			
 			if(validateLogin(loginId,password))
 			{
+				
+				
+				
+				Client client = new Client();		
+				WebResource service = client.resource(UriBuilder.fromUri(WebprojectConstants.RESTURI.trim()+"user/profile").build());		
+				ClientResponse response = service.queryParam("compId", loginId.trim()).accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+				ObjectMapper mapper = new ObjectMapper();
+				userprof = mapper.readValue(response.getEntityInputStream(), Userprofile.class);
+				
 				request.getSession().setAttribute(WebprojectConstants.LOGGEDUSERINFO, new UserMO(loginId, password));
+				request.getSession().setAttribute(WebprojectConstants.LOGGEDUSERPROF, userprof);
 				return "home";  
 			}
 
@@ -95,7 +114,7 @@ public class BasicController {
 			MultivaluedMap<String, String> params = new MultivaluedMapImpl();		   
 			params.add("username", username);
 			params.add("password", password);
-			WebResource resource = client.resource(UriBuilder.fromUri("http://localhost:8040/webprojreports-1.0.0.0/rest/user/validatelogin").build());
+			WebResource resource = client.resource(UriBuilder.fromUri(WebprojectConstants.RESTURI+"/user/validatelogin").build());
 			ClientResponse response = resource.queryParams(params).get(ClientResponse.class);
 			resp = response.getEntity(String.class);
 		} 
@@ -202,4 +221,15 @@ public class BasicController {
 
 	}
 	 */
+	
+	public static void main(String[] args) {
+		BasicController obj = new BasicController();
+		
+		try {
+			System.out.println(obj.validateLogin("dev", "dev"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

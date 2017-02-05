@@ -9,7 +9,7 @@
 <style>
 .content
 {
-	background-color: aqua;
+	background-color: #3E95B3;
 	font-family: sans-serif;
 	font-size: small;
 	border: 1px solid black;

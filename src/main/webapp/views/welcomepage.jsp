@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	<%@ taglib prefix="c" 
+           uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,6 +19,24 @@
     div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
+    
+    
+    
+    .display-success
+{
+   width: 400px;
+   border: 1px solid #D8D8D8;
+   padding: 10px;
+   border-radius: 5px;
+   font-family: Arial;
+   font-size: 11px;
+   background-color: rgb(236, 255, 216);
+   color: green;
+   text-align: center;
+   margin-top: 30px;
+}
+
+
   </style>
   
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -66,30 +86,29 @@
  
     function addUser() {
       var valid = true;
-      allFields.removeClass( "ui-state-error" );
- 
-     // valid = valid && checkLength( name, "Company Name", 3, 16 );
-     // valid = valid && checkLength( email, "email", 6, 80 );
-     // valid = valid && checkLength( compid, "Company Id", 6, 16 );
- 
-     // valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
-      //valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
-      //valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
- 
-      if ( valid ) {
-       /* $( "#users tbody" ).append( "<tr>" +
-          "<td>" + name.val() + "</td>" +
-          "<td>" + email.val() + "</td>" +
-          "<td>" + password.val() + "</td>" +
-        "</tr>" );*/
+   //   allFields.removeClass( "ui-state-error" );
+		
+        if($("#name").val == null)
+        	{        	
+        		alert("Company Name cannot be empty.");
+        	}
+        else if($("#compid").val() == null)
+        	{
+        		alert("Company Id cannot be empty.");
+        	}
+        else if($("#address").val() == null)
+        	{
+        	alert("Company Address cannot be empty.");
+        	}
+        else
+        	{
+			document.forms['createuser'].submit();
+		
+      		 dialog.dialog( "close" ); 
+        	}
 		
 		
-		document.forms['createuser'].submit();
-		
-        dialog.dialog( "close" ); 
-		
-		
-      }
+      
       return valid;
     }
  
@@ -116,6 +135,19 @@
     });
   } );
   </script>
+  
+  <script type="text/javascript">
+  
+  $( document ).ready(function() {
+		var msg = "${SUCCESS}";
+		
+		if(msg.length > 0)
+			{
+				$("#msgdiv").show();
+				
+			}
+	});
+  </script>
 </head>
 
 
@@ -124,7 +156,7 @@
 <body>
 
 	<div
-		style="height: 250px; width: 600px; background-color: aqua; position: absolute; left: 500px; top: 100px;"
+		style="height: 250px; width: 600px; background-color: #3E95B3; position: absolute; left: 500px; top: 100px;"
 		align="center">
 
 		<div id="content">
@@ -139,8 +171,11 @@
 						name="loginId" id="loginId" style="size: 15px;"/> <br>
 					<br> <label>Password</label> 
 					<input type="password" name="password" id="password"
-						style="size: 15px;"/> <br>
+						style="size: 15px;"/> 
 					<br> 
+					
+					
+					<!-- <input type="hidden" name="defpwd" values="${defpwd}">  -->
 						<input type="submit" id="loginbtn" value="Login"/>
 						
 
@@ -168,7 +203,9 @@
   </form>
 </div>
  
-
+<div id="msgdiv" hidden="true" class="display-success"> 
+<p> User profile created  successfully. Please login to change your default password. <i><c:out value="${defpwd}"/></i></p>
+</div>
 
 </body>
 </html>
